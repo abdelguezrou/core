@@ -45,7 +45,25 @@ THIS FILE AND ITS INCLUDES
 	<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="/html/css/iehacks.css" />
 	<![endif]-->
+	<%String myPortlet = request.getParameter("p_p_id");
 
+	if(UtilMethods.isSet(myPortlet)){%>
+
+		<script>
+			function inFrame () {
+			    try {
+				return window.self !== window.parent;
+			    } catch (e) {
+				return true;
+			    }
+			}
+
+			if(!inFrame ()){
+				window.top.location="/dotAdmin/#<%=CTX_PATH +  "/" + request.getParameter("p_p_id")%>";
+			}
+		</script>
+
+	<%}%>
 	<%
 	String dojoLocaleConfig = "locale:'en-us'";
 	if(locale != null){
